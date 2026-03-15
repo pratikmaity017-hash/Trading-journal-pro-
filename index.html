@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Ultimate Trading Journal</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="manifest" href="manifest.json">
+
+</head>
+
+<body>
+
+<h1>Ultimate Trading Journal</h1>
+
+<div id="login">
+
+<h2>Login</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<div id="app" style="display:none">
+
+<h2>Add Trade</h2>
+
+<input id="pair" placeholder="Pair">
+
+<input id="entry" placeholder="Entry Price">
+
+<input id="exit" placeholder="Exit Price">
+
+<input id="size" placeholder="Lot Size">
+
+<textarea id="note" placeholder="Trade note"></textarea>
+
+<input type="file" id="image">
+
+<button onclick="addTrade()">Save Trade</button>
+
+<h2>Dashboard</h2>
+
+<p>Total Trades: <span id="total"></span></p>
+
+<p>Total Profit: <span id="profit"></span></p>
+
+<p>Win Rate: <span id="winrate"></span>%</p>
+
+<canvas id="barChart"></canvas>
+
+<canvas id="equityChart"></canvas>
+
+<h2>Trade History</h2>
+
+<ul id="history"></ul>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+  </html>
