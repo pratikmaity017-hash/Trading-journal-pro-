@@ -1,68 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Ultimate Trading Journal</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<link rel="manifest" href="manifest.json">
-
+<title>Login System</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 
 <body>
 
-<h1>Ultimate Trading Journal</h1>
+<h2>Login System</h2>
 
-<div id="login">
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
 
-<h2>Login</h2>
-
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
-
+<button onclick="signup()">Sign Up</button>
 <button onclick="login()">Login</button>
 
-</div>
+<br><br>
 
-<div id="app" style="display:none">
+<button onclick="googleLogin()">Login with Google</button>
 
-<h2>Add Trade</h2>
+<br><br>
 
-<input id="pair" placeholder="Pair">
+<input id="phone" placeholder="Phone number">
+<button onclick="phoneLogin()">Login with Phone OTP</button>
 
-<input id="entry" placeholder="Entry Price">
+<script>
 
-<input id="exit" placeholder="Exit Price">
+const supabase = supabase.createClient(
+"YOUR_PROJECT_URL",
+"YOUR_PUBLIC_KEY"
+)
 
-<input id="size" placeholder="Lot Size">
+async function signup(){
 
-<textarea id="note" placeholder="Trade note"></textarea>
+let email=document.getElementById("email").value
+let password=document.getElementById("password").value
 
-<input type="file" id="image">
+const {data,error}=await supabase.auth.signUp({
+email:email,
+password:password
+})
 
-<button onclick="addTrade()">Save Trade</button>
+alert("Account Created")
 
-<h2>Dashboard</h2>
+}
 
-<p>Total Trades: <span id="total"></span></p>
+async function login(){
 
-<p>Total Profit: <span id="profit"></span></p>
+let email=document.getElementById("email").value
+let password=document.getElementById("password").value
 
-<p>Win Rate: <span id="winrate"></span>%</p>
+const {data,error}=await supabase.auth.signInWithPassword({
+email:email,
+password:password
+})
 
-<canvas id="barChart"></canvas>
+alert("Login Success")
 
-<canvas id="equityChart"></canvas>
+}
 
-<h2>Trade History</h2>
+async function googleLogin(){
 
-<ul id="history"></ul>
+await supabase.auth.signInWithOAuth({
+provider:"google"
+})
 
-</div>
+}
 
-<script src="app.js"></script>
+async function phoneLogin(){
+
+let phone=document.getElementById("phone").value
+
+await supabase.auth.signInWithOtp({
+phone:phone
+})
+
+alert("OTP Sent")
+
+}
+
+</script>
+
 </body>
-  </html>
+</html>
